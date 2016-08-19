@@ -82,6 +82,11 @@ public class principal extends javax.swing.JFrame {
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 254, 240, 40));
 
         cmdborrar.setText("BORRAR");
+        cmdborrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdborrarActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdborrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 100, 30));
 
         txtresultado1.setEditable(false);
@@ -117,6 +122,17 @@ public class principal extends javax.swing.JFrame {
        
        
     }//GEN-LAST:event_cmdcalcularActionPerformed
+
+    private void cmdborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdborrarActionPerformed
+        txtvalor1.setText("");
+        txtresultado1.setText("");
+        txtresultado2.setText(""); 
+        txtresultado3.setText("");
+        
+        txtvalor1.requestFocusInWindow();
+                
+                
+    }//GEN-LAST:event_cmdborrarActionPerformed
 
     /**
      * @param args the command line arguments
