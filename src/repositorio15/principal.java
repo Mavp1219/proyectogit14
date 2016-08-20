@@ -5,6 +5,8 @@
  */
 package repositorio15;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
@@ -59,6 +61,12 @@ public class principal extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("ESCRIBA EL DINERO DEL PRESTAMO: ");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 64, 220, 30));
+
+        txtvalor1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtvalor1KeyTyped(evt);
+            }
+        });
         jPanel3.add(txtvalor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 190, 30));
 
         cmdcalcular.setText("CALCULAR");
@@ -67,7 +75,7 @@ public class principal extends javax.swing.JFrame {
                 cmdcalcularActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdcalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 363, 100, 30));
+        jPanel3.add(cmdcalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 353, 120, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("EL MONTO DE UNA CUOTA ESPECIAL ES DE : ");
@@ -87,7 +95,7 @@ public class principal extends javax.swing.JFrame {
                 cmdborrarActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdborrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 100, 30));
+        jPanel3.add(cmdborrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 110, 40));
 
         txtresultado1.setEditable(false);
         jPanel3.add(txtresultado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 170, 30));
@@ -105,34 +113,57 @@ public class principal extends javax.swing.JFrame {
 
     private void cmdcalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdcalcularActionPerformed
         double valor1, i, suma, ce, co;
-        
-       valor1 = Double.parseDouble(txtvalor1.getText());
-       
-       i = valor1 * 0.24;
-       
-       suma = valor1 + i; 
-       
-       ce = (suma / 2) / 4;
-       
-       co = (suma / 2) / 20; 
-       
-       txtresultado1.setText(String.valueOf(ce));
-       txtresultado2.setText(String.valueOf(co));
-       txtresultado3.setText(String.valueOf(suma));
-       
-       
+
+        if (txtvalor1.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese el monto del prestamo", "Error", JOptionPane.ERROR_MESSAGE);
+            txtvalor1.requestFocusInWindow();
+            txtvalor1.selectAll();
+        } else {
+
+            valor1 = Double.parseDouble(txtvalor1.getText());
+
+            if (valor1 == 0) {
+                JOptionPane.showMessageDialog(this, "Por favor ingrese un monto diferente de 0", "Error", JOptionPane.ERROR_MESSAGE);
+                txtvalor1.requestFocusInWindow();
+                txtvalor1.selectAll();
+            } else {
+
+                i = valor1 * 0.24;
+
+                suma = valor1 + i;
+
+                ce = (suma / 2) / 4;
+
+                co = (suma / 2) / 20;
+
+                txtresultado1.setText(String.valueOf(ce));
+                txtresultado2.setText(String.valueOf(co));
+                txtresultado3.setText(String.valueOf(suma));
+
+            }
+        }
     }//GEN-LAST:event_cmdcalcularActionPerformed
 
     private void cmdborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdborrarActionPerformed
         txtvalor1.setText("");
         txtresultado1.setText("");
-        txtresultado2.setText(""); 
+        txtresultado2.setText("");
         txtresultado3.setText("");
-        
+
         txtvalor1.requestFocusInWindow();
-                
-                
+
+
     }//GEN-LAST:event_cmdborrarActionPerformed
+
+    private void txtvalor1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalor1KeyTyped
+       char c = evt.getKeyChar();
+       if(!Character.isDigit(c)){
+           getToolkit().beep();
+           evt.consume();
+       }
+        
+        
+    }//GEN-LAST:event_txtvalor1KeyTyped
 
     /**
      * @param args the command line arguments
